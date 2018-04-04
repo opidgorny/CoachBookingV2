@@ -38,15 +38,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Booking> bookings = new HashSet<>();
 
-    @PrimaryKeyJoinColumn
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
-    private UserDetailedInfo userDetailedInfo;
-
-
-    @OneToOne(cascade = CascadeType.ALL, optional = false)
-    @PrimaryKeyJoinColumn
-    private UserCoach userCoach;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,14 +48,13 @@ public class User {
                 Objects.equals(password, user.password) &&
                 role == user.role &&
                 Objects.equals(cardId, user.cardId) &&
-                Objects.equals(bookings, user.bookings) &&
-                Objects.equals(userCoach, user.userCoach);
+                Objects.equals(bookings, user.bookings);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, email, password, role, cardId, bookings, userCoach);
+        return Objects.hash(id, email, password, role, cardId, bookings);
     }
 
     @Override
@@ -76,7 +66,6 @@ public class User {
                 ", role=" + role.getParamName() +
                 ", cardId=" + cardId.toString() +
                 ", userDetailedInfo=" +
-                ", coach=" + userCoach.toString() +
                 '}';
     }
 }

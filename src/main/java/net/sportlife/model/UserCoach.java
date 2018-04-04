@@ -11,15 +11,18 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "user_coaches")
+@Table(name = "coach_details")
 @Getter
 @Setter
 public class UserCoach implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "coach_id")
+    @Column(name = "user_id")
     private Long id;
+
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
 
     @Column(name = "coach_rank")
     private String coachRank;
@@ -41,6 +44,11 @@ public class UserCoach implements Serializable {
     private Set<Booking> bookings = new HashSet<>();
 
     public UserCoach() {
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        this.id = user.getId();
     }
 
     @Override

@@ -12,15 +12,18 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user_detailed_info")
+@Table(name = "user_details")
 @Getter
 @Setter
 public class UserDetailedInfo implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
+
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private User user;
 
     @Column(name = "first_name")
     private String firstName;
