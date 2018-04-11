@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -19,21 +21,31 @@ public class Address {
 
     @Column(name = "city_name")
     private String cityName;
+
     @Column(name = "street_name")
     private String streetName;
+
     @Column(name = "street_number")
     private Integer streetNumber;
 
     @OneToOne(mappedBy = "address")
     private Club club;
 
+    public Address() {
+    }
+
+    public Address(String cityName, String streetName, Integer streetNumber) {
+        this.cityName = cityName;
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return Objects.equals(id, address.id) &&
-                Objects.equals(cityName, address.cityName) &&
+        return Objects.equals(cityName, address.cityName) &&
                 Objects.equals(streetName, address.streetName) &&
                 Objects.equals(streetNumber, address.streetNumber) &&
                 Objects.equals(club, address.club);

@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,6 +30,14 @@ public class Club {
     @ManyToMany(mappedBy = "clubSet")
     private Set<UserCoach> coaches;
 
+    public Club() {
+    }
+
+    public Club(String clubName, Address address) {
+        this.clubName = clubName;
+        this.address = address;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,14 +45,13 @@ public class Club {
         Club club = (Club) o;
         return Objects.equals(id, club.id) &&
                 Objects.equals(clubName, club.clubName) &&
-                Objects.equals(address, club.address) &&
-                Objects.equals(coaches, club.coaches);
+                Objects.equals(address, club.address);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, clubName, address, coaches);
+        return Objects.hash(id, clubName, address);
     }
 
     @Override

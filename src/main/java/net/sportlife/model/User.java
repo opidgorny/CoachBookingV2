@@ -47,14 +47,13 @@ public class User {
                 Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
                 role == user.role &&
-                Objects.equals(cardId, user.cardId) &&
-                Objects.equals(bookings, user.bookings);
+                Objects.equals(cardId, user.cardId);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, email, password, role, cardId, bookings);
+        return Objects.hash(id, email, password, role, cardId);
     }
 
     @Override

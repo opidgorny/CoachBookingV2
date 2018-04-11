@@ -59,15 +59,13 @@ public class UserCoach implements Serializable {
         return  Objects.equals(coachRank, userCoach.coachRank) &&
                 Objects.equals(hourPrice, userCoach.hourPrice) &&
                 coachStatus == userCoach.coachStatus &&
-                Objects.equals(additionalInfo, userCoach.additionalInfo) &&
-                Objects.equals(clubSet, userCoach.clubSet) &&
-                Objects.equals(bookings, userCoach.bookings);
+                Objects.equals(additionalInfo, userCoach.additionalInfo);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(coachRank, hourPrice, coachStatus, additionalInfo, clubSet, bookings);
+        return Objects.hash(coachRank, hourPrice, coachStatus, additionalInfo);
     }
 
     @Override
